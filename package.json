@@ -2,7 +2,7 @@
   "name": "mir-polizas",
   "version": "0.0.1",
   "description": "Consulta de Información de Pólizas desde nuevo modelo de datos",
-  "productName": "?",
+  "productName": "MIR - Consultas Vida",
   "cordovaId": "org.cordova.quasar.app",
   "author": "Alexander Cerna <acerna@dsbmobile.com>",
   "private": true,

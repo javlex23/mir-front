@@ -1,13 +1,42 @@
 <template>
   <q-page class="flex">
     <div class="q-pa-md all-width">
-      <q-table
-        title="Movimientos Open Items"
-        :data="data"
-        :columns="columns"
-        row-key="openItem"
-        :pagination.sync="pagination"
-      />
+      <div class="row q-col-gutter-xs">
+        <div class="col-md-3 col-xs-12">
+          <q-field label="Póliza" stack-label :dense="dense">
+            <template v-slot:control>
+              <div class="self-center full-width no-outline" tabindex="0">{{poliza}}</div>
+            </template>
+          </q-field>
+        </div>
+        <div class="col-md-3 col-xs-12">
+          <q-field label="Último evento" stack-label :dense="dense">
+            <template v-slot:control>
+              <div class="self-center full-width no-outline" tabindex="0">{{ultimo_evento}}</div>
+            </template>
+          </q-field>
+        </div>
+        <div class="col-md-3 col-xs-12">
+          <q-field label="Estado" stack-label :dense="dense">
+            <template v-slot:control>
+              <div class="self-center full-width no-outline" tabindex="0">{{estado}}</div>
+            </template>
+          </q-field>
+        </div>
+      </div>
+      <br>
+      <div class="row q-col-gutter-xs">
+        <div class="col-md-12 col-xs-12">
+          <q-table
+            :grid="$q.screen.xs"
+            title="Movimientos Open Items"
+            :data="data"
+            :columns="columns"
+            row-key="openItem"
+            :pagination.sync="pagination"
+          />
+        </div>
+      </div>
     </div>
   </q-page>
 </template>
@@ -20,6 +49,9 @@ export default {
   data () {
     return {
       poliza: '52467',
+      ultimo_evento: 'Pago',
+      estado: 'Vigente',
+      dense: false,
       pagination: {
         sortBy: 'openItem',
         descending: false,

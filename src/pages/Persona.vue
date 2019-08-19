@@ -1,13 +1,41 @@
 <template>
   <q-page class="flex">
     <div class="q-pa-md all-width">
-      <q-table
-        title="Pólizas registradas"
-        :data="data"
-        :columns="columns"
-        row-key="numeroPoliza"
-        :pagination.sync="pagination"
-      />
+      <div class="row q-col-gutter-xs">
+        <div class="col-md-4 col-xs-12">
+          <q-field label="Persona" stack-label :dense="dense">
+            <template v-slot:control>
+              <div class="self-center full-width no-outline" tabindex="0">{{persona}}</div>
+            </template>
+          </q-field>
+        </div>
+        <div class="col-md-2 col-xs-12">
+          <q-field label="Documento Identidad" stack-label :dense="dense">
+            <template v-slot:control>
+              <div class="self-center full-width no-outline" tabindex="0">{{documento}}</div>
+            </template>
+          </q-field>
+        </div>
+      </div>
+      <br>
+      <div class="row q-col-gutter-xs">
+        <div class="col-md-12 col-xs-12">
+          <q-table
+            :grid="$q.screen.xs"
+            title="Pólizas registradas"
+            :data="data"
+            :columns="columns"
+            row-key="numeroPoliza"
+            :pagination.sync="pagination"
+          >
+            <template v-slot:body-cell-numeroPoliza="cellProperties">
+              <q-td :props="cellProperties">
+                <q-btn to="Index" outline color="purple" >{{ cellProperties.value }}</q-btn>
+              </q-td>
+            </template>
+          </q-table>
+        </div>
+      </div>
     </div>
   </q-page>
 </template>
@@ -20,6 +48,8 @@ export default {
   data () {
     return {
       poliza: '52467',
+      persona: 'Karla Mónica Culquitante Abanto',
+      documento: 'DNI 19193790',
       pagination: {
         sortBy: 'poliza',
         descending: false,

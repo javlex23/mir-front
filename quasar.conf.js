@@ -60,11 +60,20 @@ module.exports = function (ctx) {
         'QTimeline',
         'QTimelineEntry',
         'QKnob',
-        'QTable'
+        'QTable',
+        'QTh',
+        'QTr',
+        'QTd',
+        'QBreadcrumbs',
+        'QBreadcrumbsEl',
+        'QDialog',
+        'QBar',
+        'QCard'
       ],
 
       directives: [
-        'Ripple'
+        'Ripple',
+        'ClosePopup'
       ],
 
       // Quasar plugins

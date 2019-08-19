@@ -309,6 +309,7 @@
           <q-timeline color="secondary">
             <q-timeline-entry heading>
               Historial pagos
+              <q-btn to="Eecc" outline color="purple" >Ver todo</q-btn>
             </q-timeline-entry>
 
             <q-timeline-entry

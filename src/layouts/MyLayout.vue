@@ -19,7 +19,7 @@
 
         <q-space />
 
-        <q-input class="GPL__toolbar-input" dense v-model="search" placeholder="Buscar">
+        <q-input class="GPL__toolbar-input" dense v-model="search" placeholder="Buscar" @keyup.enter="buscar">
           <template v-slot:prepend>
             <q-icon v-if="search === ''" name="search" />
             <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''" />
@@ -157,6 +157,38 @@
           </q-btn>
 
         </div>
+
+        <q-dialog v-model="bar" persistent>
+          <q-card>
+            <q-bar>
+              <div>Resultados de búsqueda</div>
+
+              <q-space />
+
+              <q-btn dense flat icon="close" v-close-popup>
+                <q-tooltip>Close</q-tooltip>
+              </q-btn>
+            </q-bar>
+
+            <q-card-section>
+              <div class="col-md-12 col-xs-12">
+                <q-table
+                  :grid="$q.screen.xs"
+                  :data="data"
+                  :columns="columns"
+                  row-key="numeroPoliza"
+                  :pagination.sync="pagination"
+                >
+                  <template v-slot:body-cell-numeroPoliza="cellProperties">
+                    <q-td :props="cellProperties">
+                      <q-btn to="Index" outline color="purple" >{{ cellProperties.value }}</q-btn>
+                    </q-td>
+                  </template>
+                </q-table>
+              </div>
+            </q-card-section>
+          </q-card>
+        </q-dialog>
       </q-page-sticky>
     </q-page-container>
   </q-layout>
@@ -170,6 +202,7 @@ export default {
       leftDrawerOpen: false,
       search: '',
       storage: 0.26,
+      bar: false,
       links1: [
         { icon: 'markunread_mailbox', text: 'Póliza' },
         { icon: 'dashboard', text: 'EECC' },
@@ -192,7 +225,47 @@ export default {
         { icon: 'library_books', text: 'Animation' },
         { icon: 'dashboard', text: 'Collage' },
         { icon: 'book', text: 'Photo book' }
+      ],
+      columns: [
+        {
+          name: 'numeroDocumento',
+          align: 'center',
+          label: 'Documento',
+          field: 'numeroDocumento',
+          sortable: true
+        },
+        {
+          name: 'cliente',
+          align: 'center',
+          label: 'Cliente',
+          field: 'cliente',
+          sortable: true
+        },
+        {
+          name: 'numeroPoliza',
+          align: 'center',
+          label: 'Número Póliza',
+          field: 'numeroPoliza',
+          sortable: true
+        }
+      ],
+      data: [
+        {
+          numeroDocumento: '19197656',
+          cliente: 'Karla Monica Culquitante Abanto',
+          numeroPoliza: '104643'
+        },
+        {
+          numeroDocumento: '19156787',
+          cliente: 'Manuel Alonso Vargas Gutierrez',
+          numeroPoliza: '104643'
+        }
       ]
+    }
+  },
+  methods: {
+    buscar () {
+      this.bar = true
     }
   }
 }
